@@ -1,0 +1,79 @@
+<head>
+		<title>HTDOCS Folder</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<style type="text/css">
+		/* FONT FAMILY */
+		body{
+			font-family: "Helvetica", "Helvetica Neue";
+			width: 70%;
+			margin: auto;
+			color: white;
+			background-color: rgb(21, 21, 21);
+		}
+
+		h1 {
+			margin-left: 50px;
+			margin-bottom: 50px;
+		}
+
+		/* TABLE */
+		tr, td, th
+		{
+			padding: 5px 10px;
+			text-align: left;
+			font-size: 20px;
+			color: white;
+		}
+		table{
+			font-size: 0.9em;
+			width: 100%;
+		}
+		/* LINKS */
+		a{
+			color: white;
+			text-decoration: none;
+
+		}
+
+		a[href*="/"]::before {
+    		content: url(folder.png);
+			margin-right: 10px;
+		}	
+		/* PARAGRAPHS */
+		p{
+			font-size: 0.75em;
+			margin-top: 15px;
+			margin-bottom: 15px;
+		}
+		/* ALWAYS HIDE FILE DESCRIPTIONS (5th element as table header + data) */
+		th:nth-child(5){
+				display: none;
+		}
+		td:nth-child(5){
+				display: none;
+		}
+
+		/* MEDIA QUERIES FOR MOBILE */
+		@media screen and (min-width: 320px) and (max-width: 768px){
+			body{
+				width: 90%;
+			}
+			td, th{
+				font-size: 1.0em;
+			}
+			p{
+				font-size: 0.9em;
+			}
+		}
+		/******************************
+		INLINE STYLES END HERE
+		*****************************/
+		</style>
+	</head>
+	<body>
+		<h1 id="title"></h1>
+	</body>
+	<script>
+		document.getElementById("title").innerHTML = window.location.pathname;
+	</script>
+</html>
