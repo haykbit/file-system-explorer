@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+}
+
+.leftSection {
+  width: 30%;
+  background-color: rgb(213, 213, 213);
+}
+
+.rightSection {
+  width: 70%;
+  background-color: rgb(243, 243, 243);
+}
