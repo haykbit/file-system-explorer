@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,6 +53,28 @@
         listDirContent($dir);
         ?>
     </table>
+
+    <?php
+    if (isset($_SESSION['error'])) {
+        echo "
+    <div class='delete__options h-75'>
+    <div class='empty__folder alert alert-danger mr-2 ml-2 h-75' role='alert'>
+    This folder is empty. Create a folder or add a file.
+    </div> 
+    <div class='delete__options'>
+    <form action='checkRemove.php' method='GET'>
+    <button type='submit' name='confirmDelte' class='btn btn-primary'>Yes</button>
+    </form>
+    <form action='checkRemove.php' method='GET'>
+    <button type='submit' name='declineDelte' id='declineButton' class='btn btn-dark'>No</button>
+    </form>
+    </div>
+    </div>";
+    } else if (isset($_SESSION['decline'])) {
+        echo '';
+    }
+
+    ?>
 
     <div class="bottom__bar">
         <section class="upload__file">

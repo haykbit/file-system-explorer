@@ -94,3 +94,24 @@ input[type="file"] {
   padding: 6px 12px;
   cursor: pointer;
 }
+
+.delete__options{
+  display: flex;
+}
+
+.empty__folder {
+  padding: 9px !important;
+  font-size: 13px !important;
+}
+
+table td .button__actions {
+  display: flex;
+}
+
+table td #editButton{
+  margin-left: 5px;
+}
+
+.delete__options #declineButton {
+  margin-left: 5px;
+}

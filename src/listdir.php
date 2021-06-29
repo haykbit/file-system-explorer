@@ -1,58 +1,11 @@
 <?php
 include "create.php";
 // $dir contiene el PATH del directorio listado
+session_unset();
 $_SESSION['path'] = $_GET['dirList'];
 
 $dir = $_GET['dirList'];
 ?>
-
-<!--<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="https://kit.fontawesome.com/55a90b93c4.js" crossorigin="anonymous"></script>
-    <title>Document</title>
-</head>
-
-<body>
-    <div class="main__content">
-        <div class="top__bar">
-            <section class="create__folder">
-                <form action="create.php" method="GET" enctype="multipart/form-data">
-                    <p>Create folder</p>
-                    <input id="createInput" type="text" name="folderCurrentName">
-                    <input id="createButton" type="submit" value="Create Folder" name="createDir">
-                </form>
-            </section>
-        </div>
-        <section class="back__button">
-            <form action="./movedir.php" method="GET" enctype="multipart/form-data">
-                <input type="submit" value="Back" name="backFolder">
-            </form>
-        </section>
-        <div class="table__render">
-            <table class="directories__list">
-
-            </table>
-        </div>
-        <div class="bottom__bar">
-            <section class="upload__file">
-                <form action="upload.php" method="GET" enctype="multipart/form-data">
-                    <p>Upload a File</p>
-                    <input type="file" name="uploadedFile" />
-                    <input type="submit" name="uploadBtn" value="Upload" />
-                </form>
-            </section>
-        </div>
-    </div>
-</body>
-<script src="../assets/js/main.js"></script>
-
-</html>-->
 
 <!DOCTYPE html>
 <html lang="en">
