@@ -1,26 +1,60 @@
 <?php
+session_start();
+
+include "errors.php";
+
+$dir = $_SESSION['path'];
+$path = dirname($dir);
+$result = str_replace("/", "%2F", $path);
+
+$currentPath = $_SESSION['item'];
+$prevPath = before_last('/', $currentPath);
+
 if (isset($_FILES['file'])) {
-    $errors = array();
-    $file_name = $_FILES['file']['name'];
-    $file_size = $_FILES['file']['size'];
-    $file_tmp = $_FILES['file']['tmp_name'];
-    $file_type = $_FILES['file']['type'];
-    $file_ext = strtolower(end(explode('.', $_FILES['file']['name'])));
+    $file = $_FILES['file'];
 
-    $extensions = array("txt");
+    $file_name = $file['name'];
+    $file_tmp = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_error = $file['error'];
 
-    if (in_array($file_ext, $extensions) === false) {
-        $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
-    }
+    $file_ext = explode('.', $file_name);
+    $file_ext = strtolower(end($file_ext));
 
-    if ($file_size > 2097152) {
-        $errors[] = 'File size must be excately 2 MB';
-    }
+    $allowed = array('doc', 'csv', 'jpg', 'png', 'txt', 'ppt', 'odt', 'pdf', 'zip', 'rar', 'exe', 'svg', 'mp3', 'mp4');
 
-    if (empty($errors) == true) {
-        move_uploaded_file($file_tmp, "images/" . $file_name);
-        echo "Success";
-    } else {
-        print_r($errors);
+    if (in_array($file_ext, $allowed)) {
+        if ($file_error === 0) {
+            if ($file_size <= 2097152) {
+                if ($prevPath == "../root") {
+                    $file_name_new = $file_name;
+                    $file_destination = $prevPath . "/" . $file_name_new;
+                    echo "$prevPath" . "\n";
+                    echo "$file_name_new" . "\n";
+                    echo "$file_destination";
+                    //header("Location: ./index.php");
+                } else if ($currentPath != "../root") {
+                    $file_name_new = $file_name;
+                    $file_destination = $prevPath . "/" . $file_name_new;
+                    echo "$prevPath" . "\n";
+                    echo "$file_name_new" . "\n";
+                    echo "$file_destination";
+                    //header("Location: ./listdir.php?dirList=$result");
+                }
+            }
+        }
     }
 }
+
+
+function before_last($text, $inthat)
+{
+    return substr($inthat, 0, strrevpos($inthat, $text));
+};
+
+function strrevpos($instr, $needle)
+{
+    $rev_pos = strpos(strrev($instr), strrev($needle));
+    if ($rev_pos === false) return false;
+    else return strlen($instr) - $rev_pos - strlen($needle);
+};

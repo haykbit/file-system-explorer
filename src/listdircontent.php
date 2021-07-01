@@ -4,6 +4,7 @@ function listDirContent($dir)
 {
     $dirs = array_filter(glob($dir . "/*"));
     if (!empty($dirs)) {
+        $arrayItem = [];
         echo "
         <tr class='table__fields'>
         <th scope='col'>Name</th>
@@ -15,8 +16,9 @@ function listDirContent($dir)
         </tr>";
         foreach ($dirs as $item) {
             $_SESSION['item'] = $item;
-            //$rest = substr($item, 8);
+            array_push($arrayItem, $item);           //$rest = substr($item, 8);
             $rest = after_last('/', $item);
+            $_SESSION['itemList'] = $arrayItem;
             echo "<tr>";
             echo "<form action='listdir.php' method='GET'>";
 
@@ -61,7 +63,8 @@ function listDirContent($dir)
                 Remove
             </button>
             </form>";
-            echo "
+            if (is_dir($item)) {
+                echo "
             <form action='./remove.php' method='GET'><button type='submit' name='editItem' id='editButton' class='btn btn-primary'>
                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16 '>
                 <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
@@ -69,8 +72,29 @@ function listDirContent($dir)
                 </svg>
                 Edit
             </button></form>
+            </div></td>
+            ";
+            } else {
+                echo "
+            <form action='./edit.php' method='GET'><button type='submit' name='editItem' id='editButton' class='btn btn-primary'>
+                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16 '>
+                <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
+                <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
+                </svg>
+                Edit
+            </button></form>";
+                echo "
+            <form action='./openfile.php' method='GET'><button type='submit' name='openfile' value='$item' id='openFile' class='btn btn-primary'>
+                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-journal-text' viewBox='0 0 16 16'>
+                <path d='M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z'/>
+                <path d='M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z'/>
+                <path d='M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z'/>
+                </svg>
+                Open
+            </button></form>
             </div></td>";
-            echo "</tr>";
+                echo "</tr>";
+            }
         }
     } else {
         //echo "<div class='empty__folder'><img src='../assets/img/folder.png' width='300px' height='300px' /><h3>Empty folder</h3></div>";

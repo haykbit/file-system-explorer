@@ -26,9 +26,7 @@ if (isset($_GET['removeItem'])) {
     } else {
         $dirs = scandir($currentPath);
         $empty = sizeof($dirs);
-        echo "$empty";
         if ($empty <= 2) {
-            echo $prevPath;
             if ($prevPath == "../root") {
                 rmdir($currentPath);
                 header("Location: ./index.php");
@@ -38,6 +36,8 @@ if (isset($_GET['removeItem'])) {
             }
         } else {
             $_SESSION['error'] = true;
+            echo "<br/>" . "$prevPath" . "<br/>";
+            echo "$currentPath";
             if ($prevPath == "../root" && $empty >= 2) {
                 rmdir($currentPath);
                 header("Location: ./index.php");

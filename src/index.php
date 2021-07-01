@@ -78,13 +78,13 @@ session_start();
 
     <div class="bottom__bar">
         <section class="upload__file">
-            <form action="upload.php" method="GET" enctype="multipart/form-data">
+            <form action="upload.php" method="post" enctype="multipart/form-data">
                 <label class="custom-file-upload ml-2">
-                    <input id="uploadInput" type="file" name="uploadedFile" />
+                    <input type="file" name="file" id="uploadInput" />
                     <img src="../assets/img/file.png" width="25px" height="25px">
                     Select a file
                 </label>
-                <input id="uploadButton" type="submit" name="uploadBtn" value="Upload" class="btn btn-primary" />
+                <input type="submit" value="Upload" class="btn btn-primary" id="uploadButton" />
             </form>
         </section>
     </div>

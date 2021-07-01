@@ -64,9 +64,9 @@ $dir = $_GET['dirList'];
 
     <div class="bottom__bar">
         <section class="upload__file">
-            <form action="upload.php" method="GET" enctype="multipart/form-data">
+            <form action="upload.php" method="post" enctype="multipart/form-data">
                 <label class="custom-file-upload ml-2">
-                    <input id="uploadInput" type="file" name="uploadedFile" />
+                    <input id="uploadInput" type="file" name="file" />
                     <img src="../assets/img/file.png" width="25px" height="25px">
                     Select a file
                 </label>

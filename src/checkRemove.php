@@ -3,12 +3,14 @@ session_start();
 
 include "errors.php";
 
-$dir = $_SESSION['path'];
-$path = dirname($dir);
+$currentPath = $_SESSION['path'];
+$prevPath = before_last('/', $currentPath);
+
+$path = dirname($currentPath);
 $result = str_replace("/", "%2F", $path);
 
-$currentPath = $_SESSION['item'];
-$prevPath = before_last('/', $currentPath);
+echo "CURRENT PATH $currentPath" . "<br/>";
+echo "PREV PATH $prevPath";
 
 if (isset($_GET['confirmDelte'])) {
     if ($prevPath == "../root") {
